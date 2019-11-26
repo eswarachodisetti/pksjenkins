@@ -14,7 +14,7 @@ pipeline {
      stage('Build') {
       steps {
         container('jx-base') {
-          sh 'docker build -t dhanapodigiri/poclistener:6.0 .'
+          sh 'docker build -t dhanapodigiri/poclistener:7.0 .'
 		      sh 'docker images'
 	
         }
@@ -31,7 +31,7 @@ pipeline {
 				
 					sh 'mount -o remount,rw /home/jenkins/.docker'
 					sh 'scp ${WORKSPACE}/config.json /home/jenkins/.docker/'
-					sh 'docker push dhanapodigiri/poclistener:6.0'	
+					sh 'docker push dhanapodigiri/poclistener:7.0'	
 				}
 			
 			}
