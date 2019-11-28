@@ -14,7 +14,7 @@ pipeline {
      stage('Build') {
       steps {
         container('maven') {
-          sh 'docker build -t gcr.io/synt-int-pks-new-lab/poc/poctest:7.0 .'
+          sh 'docker build -t docker-registry.jx.35.229.61.119.nip.io/poctest:7.0 .'
 		      sh 'docker images'
 	
         }
@@ -32,7 +32,7 @@ pipeline {
 				//	sh 'mount -o remount,rw /home/jenkins/.docker'
 				//	sh 'scp ${WORKSPACE}/config.json /home/jenkins/.docker/'
 				//	sh 'docker push dhanapodigiri/poclistener:7.0'	
-					sh 'docker push gcr.io/synt-int-pks-new-lab/poc/poctest:7.0'
+					sh 'docker push docker-registry.jx.35.229.61.119.nip.io/poctest:7.0'
 				}
 			
 			}
