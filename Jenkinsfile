@@ -3,18 +3,18 @@ pipeline {
     disableConcurrentBuilds()
   }
   agent {
-    label "jenkins-jx-base"
+    label "jenkins-maven"
   }
   environment {
-    DEPLOY_NAMESPACE = "jx-production"
+    DEPLOY_NAMESPACE = "default"
   }
   stages {
     
     
      stage('Build') {
       steps {
-        container('jx-base') {
-          sh 'docker build -t dhanapodigiri/poclistener:7.0 .'
+        container('maven') {
+          sh 'docker build -t gcr.io/synt-int-pks-new-lab/poc/poctest:7.0 .'
 		      sh 'docker images'
 	
         }
@@ -27,11 +27,12 @@ pipeline {
     stage('Push') {
 		steps{
 			script {
-				container('jx-base') {
+				container('maven') {
 				
-					sh 'mount -o remount,rw /home/jenkins/.docker'
-					sh 'scp ${WORKSPACE}/config.json /home/jenkins/.docker/'
-					sh 'docker push dhanapodigiri/poclistener:7.0'	
+				//	sh 'mount -o remount,rw /home/jenkins/.docker'
+				//	sh 'scp ${WORKSPACE}/config.json /home/jenkins/.docker/'
+				//	sh 'docker push dhanapodigiri/poclistener:7.0'	
+					sh 'docker push gcr.io/synt-int-pks-new-lab/poc/poctest:7.0'
 				}
 			
 			}
@@ -39,7 +40,7 @@ pipeline {
 	}
 	     
 	
-    
+ /*   
     stage('Validate Environment') {
       steps {
         container('jx-base') {
@@ -53,5 +54,7 @@ pipeline {
 
       }
     }
+	  
+	*/  
   }
 }
